@@ -1,6 +1,15 @@
 from django.shortcuts import render, redirect
 from .models import Post
 from .forms import PostModelForm
+from django.contrib import messages
+from django.views.decorators.http import require_POST
+"""
+https://docs.djangoproject.com/en/2.1/topics/http/decorators/
+
+require_POST : POST메소드만 허용하도록 하는 데코레이터
+require_safe : GET & HEAD method만 허용하는 데코레이터
+
+"""
 
 # Create your views here.
 def create(request):
@@ -9,6 +18,10 @@ def create(request):
         form = PostModelForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Successfully uploaded!")
+            return redirect("posts:list")
+        else:
+            messages.error(request, "request denied!")
             return redirect("posts:create")
     else:
         # modelform을 전달해서 form을 보여줌.
@@ -17,3 +30,31 @@ def create(request):
             'form' : form
         })
 
+def list(request):
+    posts = Post.objects.all()
+    return render(request, 'posts/list.html', {
+        'posts' : posts
+    })
+
+@require_POST
+def delete(request, post_id):
+    p = Post.objects.get(id=post_id)
+    p.delete()
+    return redirect('posts:list')
+    
+def update(request, post_id):
+    p = Post.objects.get(id=post_id)
+    if request.method == "POST":
+        form = PostModelForm(request.POST, instance=p)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully modified!")
+            return redirect('posts:list')
+        else:
+            messages.error(request, "request denied!")
+            return redirect('posts:create')
+    else:
+        form = PostModelForm(instance=p)
+        return render(request, 'posts/create.html', {
+            'form' : form
+        })

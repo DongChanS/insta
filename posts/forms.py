@@ -17,9 +17,6 @@ class PostModelForm(forms.ModelForm):
             widget
             - 생성자
                 - attrs : HTML 속성들을 담는 딕셔너리
-            - 메서드
-                - format_value(value) : widget template에 이 값이 쓰였는지
-            
     """
     content = forms.CharField(label="content", widget=forms.Textarea(
         # 조절하고 싶은 html attribute들을 넣어주면됨.
