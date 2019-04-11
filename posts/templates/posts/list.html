@@ -7,7 +7,7 @@
   <!-- flexbox -->
     {% for post in posts %}
     <div class="card post-card" style="width: 40rem;">
-      <img src="https://picsum.photos/200/20{{forloop.counter}}/?random" 
+      <img src="{{ post.image.url }}" 
            class="card-img-top card-img" alt="...">
       <div class="card-body">
         <p class="card-text">{{ post.content }}</p>

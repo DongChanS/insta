@@ -27,7 +27,7 @@ class PostModelForm(forms.ModelForm):
     # 2. 해당 input 필드의 속성을 추가 & 어떤 모델을 조작할지
     class Meta:
         model = Post
-        fields = ['content']
+        fields = ['content','image']
         # __all__ 이라고 하면 모든 컬럼을 받을 수 있는데,
         # 단점도 있음 (ex, created_at, updated_at같은건 받으면 안되니까)
         
