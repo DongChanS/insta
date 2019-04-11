@@ -1,9 +1,11 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 class Post(models.Model):
     content = models.CharField(max_length=150)
     image = models.ImageField(blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     
     def __str__(self):
         return f"포스트 내용 : {self.content}"
@@ -26,6 +28,4 @@ Model 자투리 시간에 공부하기
             ('L', 'Large'),
                 ) => 
         the select option 'Small' will be stored in DB as 'S'
-    
-
 """
