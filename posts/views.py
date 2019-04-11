@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
 from .forms import PostModelForm
 from django.contrib import messages
@@ -38,12 +38,12 @@ def list(request):
 
 @require_POST
 def delete(request, post_id):
-    p = Post.objects.get(id=post_id)
+    p = get_object_or_404(Post, id=post_id)
     p.delete()
     return redirect('posts:list')
     
 def update(request, post_id):
-    p = Post.objects.get(id=post_id)
+    p = get_object_or_404(Post, id=post_id)
     if request.method == "POST":
         form = PostModelForm(request.POST, instance=p)
         if form.is_valid():
