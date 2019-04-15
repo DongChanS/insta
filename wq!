@@ -1,0 +1,167 @@
+[33mcommit d2579da5cc47f278c37a43dc07af99d78dea938d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Mon Apr 15 01:29:37 2019 +0000
+
+    template에 like기능 구현 & view에 login_required 데코레이터 추가
+
+[33mcommit a4f675120fe94422199eea14d8fdfc451a0a12bb[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Mon Apr 15 01:10:17 2019 +0000
+
+    User와 Post를 M:N으로 연결하고 view에 좋아요 기능 추가
+
+[33mcommit 85f8676138e2d057ab1fa73d1a6f4e6db7bdda0f[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Mon Apr 15 01:09:18 2019 +0000
+
+    django extensions 설치 및 추가
+
+[33mcommit 16a531577fbd305c8a4fa4f72fc5a3a67d1cc9e9[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Fri Apr 12 07:54:07 2019 +0000
+
+    M:N relation 공부하였음
+
+[33mcommit ec33cc99d06b66ff1603452bfa26fdc8d060025b[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Thu Apr 11 08:26:02 2019 +0000
+
+    오늘 공부한 내용 정리
+
+[33mcommit 78c63100f0c6677970434a3716e4e8b659bd291c[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Thu Apr 11 08:25:30 2019 +0000
+
+    User 모델과 Post 모델을 1:N으로 연결
+
+[33mcommit 2c6cc32992cba60f97e0da283a643595027ca96c[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Thu Apr 11 07:38:24 2019 +0000
+
+    이미지 업로드 기능 구현
+
+[33mcommit 3af55a0f0890052a2e9daf1de6bb60426cc40006[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Thu Apr 11 06:39:20 2019 +0000
+
+    view에서 object.get을 get_object_or_404로 수정
+
+[33mcommit 2d3096ca118bf73e3f7e3fda2574cd2b9b3e4ea4[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Thu Apr 11 06:38:40 2019 +0000
+
+    Model 필드에 Imagefield추가 & migration
+
+[33mcommit 43dc5678d5cdaf32ec4c7664d6c13d94e8ad4408[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Thu Apr 11 06:36:10 2019 +0000
+
+    posts/views.py
+
+[33mcommit 91f7654ff60c56c2b86b05bfc46d18c4146f4cde[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Wed Apr 10 08:26:32 2019 +0000
+
+    Update & Delete & Read 기능 추가
+
+[33mcommit 140afd446cb6da3fc33339c748870f2105309492[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Wed Apr 10 08:21:57 2019 +0000
+
+    static 폴더 추가 & style.css 작성
+
+[33mcommit b789289b5b6529a9e9540ce3bf8e3892b672e778[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Wed Apr 10 08:13:41 2019 +0000
+
+    상세개요 업데이트
+
+[33mcommit d0b37d4351c75c900c40e4bd8c141135f13cb755[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Wed Apr 10 08:08:22 2019 +0000
+
+    메시지 기능 추가
+
+[33mcommit 5644f33125cdc4d124d91ce377c9f69c6880c96e[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Wed Apr 10 08:07:55 2019 +0000
+
+    설정파일 수정
+
+[33mcommit 2bb070b1f24e40968466151906f71b5c279f3633[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Wed Apr 10 07:26:08 2019 +0000
+
+    Post 작성하는 action 추가
+
+[33mcommit 957ec6d2447f56e37b11d60fdb621bbdc340e1e5[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Wed Apr 10 07:25:15 2019 +0000
+
+    Post 테이블의 __str__메소드 추가
+
+[33mcommit e9cf4749c369fcf86288fd5a344acdaf050e6e5b[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Wed Apr 10 07:23:59 2019 +0000
+
+    Bootstrap4 설치 & Settings.py에 추가
+
+[33mcommit 5f3cdf285ebc6648baad1ec43bbd08337ed35dc3[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Wed Apr 10 07:23:23 2019 +0000
+
+    layout 변경(navbar 추가 + container 추가)
+
+[33mcommit cea119bd9b8771d0bff6bf81d27f17f3391a7bd9[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Wed Apr 10 06:18:42 2019 +0000
+
+    /posts/ 관련 url 추가 & create action 추가
+
+[33mcommit b95f659d21034e80de993e70ec8ee11db0e327e3[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Mon Apr 8 08:32:27 2019 +0000
+
+    base.html 템플릿 추가 & templates 폴더 생성 & settings.py의 DIR에 등록
+
+[33mcommit 52174e0057a5b5cd34323862788775f34bddb1f2[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Mon Apr 8 08:20:44 2019 +0000
+
+    admin에 모델 추가
+
+[33mcommit 224ac38260a3d903e36f72d1f078e2746b19cb74[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Mon Apr 8 08:18:30 2019 +0000
+
+    Post 모델 생성 & migrate 완료
+
+[33mcommit 57306bf7a92303da967775903bd5efc0d04b1ffd[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Mon Apr 8 08:13:50 2019 +0000
+
+    Post app을 생성 & settings.py 내용 추가
+
+[33mcommit 018c2048563b5e1290260cac8f6c424331db65c1[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Mon Apr 8 07:39:11 2019 +0000
+
+    README.md 추가 & 프로젝트 개요 작성
+
+[33mcommit 535cf46be881a6c5ade3f258a424917dcd75c11b[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Mon Apr 8 07:34:24 2019 +0000
+
+    README.md 추가 & 프로젝트 개요 작성
+
+[33mcommit 9b23c82d8cee0f23b965101b7231c40543f16e29[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Mon Apr 8 07:32:37 2019 +0000
+
+    .gitignore file 추가 & gitignore.io에서 받아온 내용 추가
+
+[33mcommit 016c11de3fdd777950692590e86fcb27aeaa6072[m
+Author: Dong Chan <start6663@gmail.com>
+Date:   Mon Apr 8 07:29:32 2019 +0000
+
+    Instragram 프로젝트 생성 및 instagram 앱 생성
