@@ -3,6 +3,7 @@ from .models import Post
 from .forms import PostModelForm
 from django.contrib import messages
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 """
 https://docs.djangoproject.com/en/2.1/topics/http/decorators/
 
@@ -32,11 +33,8 @@ def create(request):
 
 def list(request):
     posts = Post.objects.all()
-    if request.user:
-        like_posts = request.user.like_posts.all()
     return render(request, 'posts/list.html', {
         'posts' : posts,
-        'like_posts': like_posts,
     })
 
 def delete(request, post_id):
@@ -65,14 +63,14 @@ def update(request, post_id):
         return render(request, 'posts/create.html', {
             'form' : form
         })
-        
+
+@login_required
 def like(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    if request.user:
-        u = request.user
-        if post in u.like_posts.all():
-            u.like_posts.remove(post)
-        else:
-            u.like_posts.add(post)
-    
+    u = request.user
+    if post in u.like_posts.all():
+        u.like_posts.remove(post)
+    else:
+        u.like_posts.add(post)
+
     return redirect('posts:list')
