@@ -32,11 +32,13 @@ def create(request):
 
 def list(request):
     posts = Post.objects.all()
+    if request.user:
+        like_posts = request.user.like_posts.all()
     return render(request, 'posts/list.html', {
-        'posts' : posts
+        'posts' : posts,
+        'like_posts': like_posts,
     })
 
-@require_POST
 def delete(request, post_id):
     p = get_object_or_404(Post, id=post_id)
     if request.user != p.user:
@@ -63,3 +65,14 @@ def update(request, post_id):
         return render(request, 'posts/create.html', {
             'form' : form
         })
+        
+def like(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.user:
+        u = request.user
+        if post in u.like_posts.all():
+            u.like_posts.remove(post)
+        else:
+            u.like_posts.add(post)
+    
+    return redirect('posts:list')
