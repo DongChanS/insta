@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 class Post(models.Model):
@@ -10,7 +11,12 @@ class Post(models.Model):
     
     def __str__(self):
         return f"포스트 내용 : {self.content}"
-        
+
+class Comment(models.Model):
+    content = models.CharField(max_length=150)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    
 """
 Model 자투리 시간에 공부하기
 

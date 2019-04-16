@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post
-from .forms import PostModelForm
+from .models import Post, Comment
+from .forms import PostModelForm, CommentModelForm
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+from django.forms import formset_factory
 """
 https://docs.djangoproject.com/en/2.1/topics/http/decorators/
 
@@ -33,8 +34,10 @@ def create(request):
 
 def list(request):
     posts = Post.objects.all()
+    form = CommentModelForm()
     return render(request, 'posts/list.html', {
         'posts' : posts,
+        'form' : form
     })
 
 def delete(request, post_id):
@@ -74,3 +77,23 @@ def like(request, post_id):
         u.like_posts.add(post)
 
     return redirect('posts:list')
+    
+@login_required
+@require_POST
+def create_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    form = CommentModelForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.post_id = post.id
+        comment.user_id = request.user.id
+        comment.save()
+    return redirect('posts:list')
+    
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    comment.delete()
+    return redirect('posts:list')
+    

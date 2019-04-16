@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load bootstrap4 %}
 
 {% block content %}
   <div class="row justify-content-center"> 
@@ -27,6 +28,30 @@
         </a>
         <p class="card-text">{{post.like_users.count}}명이 좋아합니다.</p>
       </div>
+      <div class="card-body">
+        <!-- Comment에 대한 ModelForm을 쓰라! -->
+        <form action="{% url 'posts:create_comment' post.id %}" method="POST">
+          {% bootstrap_form form %}  
+          <button type="submit">작성</button>
+          {% csrf_token %}
+        </form>
+      </div>
+      <div class="card-body">
+          <h5>Comments</h5>
+          {% for comment in post.comment_set.all %}
+            <div class="card-text">
+                <strong>{{comment.user.username}}</strong>
+                <span>{{comment.content}}</span>
+                {% if request.user == comment.user %}
+                  <button type="submit"><a href="{% url 'posts:delete_comment' comment.id %}">삭제</a></button>
+                {% endif %}  
+            </div>
+          {% empty %}
+            <div class="card-text">
+              댓글이 없습니다.
+            </div>
+          {% endfor %}
+        </div>
     </div>
     {% endfor %}
   </div>
