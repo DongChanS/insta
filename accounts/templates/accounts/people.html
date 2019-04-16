@@ -9,8 +9,15 @@
   </div>
   <div class="col-9 text-center">
     <h2>{{person.username}}</h2>
+    <p>{{person.last_name}}{{person.first_name}}</p>
   </div>
 </header>
+
+{% if user.username == person.username %}
+  <a href="{% url 'accounts:update' %}" class="btn btn-info">회원정보수정</a>
+  <a href="{% url 'accounts:delete' %}" class="btn btn-warning" id="delete_user">회원탈퇴</a>
+  <a href="{% url 'accounts:password' %}" class="btn btn-warning" id="delete_user">비밀번호변경</a>
+{% endif %}
 
 <div class="row">
   {% for post in person.post_set.all %}

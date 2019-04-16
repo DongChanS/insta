@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+  <h1>회원정보수정</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form user_change_form %}
+    <button type="submit">제출</button>
+  </form>
+{% endblock %}
