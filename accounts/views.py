@@ -4,7 +4,8 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserChangeForm
+from .forms import CustomUserChangeForm, ProfileModelForm
+from .models import Profile
 
 # Create your views here.
 def login(request):
@@ -32,10 +33,11 @@ def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            auth_login(request, form.instance)
+            user = form.save()
+            Profile.objects.create(user=user)
+            auth_login(request, user)
             # 여기서는 get_user 못씀!
-            return redirect('posts:list')
+            return redirect('accounts:update')
         else:
             return redirect('accounts:signup')
         
@@ -59,18 +61,31 @@ def update(request):
     지금 있는 정보를 보여줌
     사용자들에게 정보를 받아서 db에 반영함.
     """
+    user_profile, created = Profile.objects.get_or_create(
+        user = request.user
+    )
+    
+    # if hasattr(request.user, 'profile'):
+    #     instance = request.user.profile
+    # else:
+    #     instance = Profile.objects.create(user=request.user)
+    
     if request.method == "POST":
         user_change_form = CustomUserChangeForm(request.POST, instance=request.user)
-        if user_change_form.is_valid():
+        profile_form = ProfileModelForm(request.POST, instance=user_profile)
+        if user_change_form.is_valid() and profile_form.is_valid():
             user = user_change_form.save()
+            profile = profile_form.save()
             return redirect('people', user.username)
         else:
             return redirect('accounts:update')
     else:
         user_change_form = CustomUserChangeForm(instance=request.user)
+        profile_form = ProfileModelForm(instance=user_profile)
         #PasswordChangeForm은 첫번째인자로 request.user를 받기 때문에 instance라고 명시하면 안됨..
         context = {
             'user_change_form' : user_change_form,
+            'profile_form' : profile_form,
         }
         return render(request, 'accounts/update.html', context)
 
@@ -94,3 +109,4 @@ def password(request):
         return render(request, 'accounts/password.html', {
             'password_change_form' : password_change_form
         })
+        
