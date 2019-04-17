@@ -4,7 +4,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserChangeForm, ProfileModelForm
+from .forms import CustomUserChangeForm, ProfileModelForm, CustomUserCreationForm
 from .models import Profile
 
 # Create your views here.
@@ -31,7 +31,7 @@ def logout(request):
     
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             Profile.objects.create(user=user)
@@ -42,7 +42,7 @@ def signup(request):
             return redirect('accounts:signup')
         
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
         return render(request, 'accounts/signup.html', {
             'form' : form
         })
@@ -109,4 +109,14 @@ def password(request):
         return render(request, 'accounts/password.html', {
             'password_change_form' : password_change_form
         })
-        
+
+def follow(request, user_id):
+    to_user = get_object_or_404(get_user_model(), pk=user_id)
+    from_user = request.user
+    
+    if to_user in from_user.following.all():
+        from_user.following.remove(to_user)
+    else:
+        from_user.following.add(to_user)
+    
+    return redirect('people', to_user)

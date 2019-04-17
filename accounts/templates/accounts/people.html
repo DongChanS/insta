@@ -8,7 +8,13 @@
     <img src="https://picsum.photos/200/100/?random">
   </div>
   <div class="col-9 text-center">
-    <h2>{{person.username}}</h2>
+    <h2>{{person.username}}
+        {% if person in user.following.all %}
+          <a href="{% url 'accounts:follow' person.id %}">팔로우됨</a>
+        {% else %}
+          <a href="{% url 'accounts:follow' person.id %}">팔로우</a>
+        {% endif %}
+    </h2>
     <div>{{person.last_name}}{{person.first_name}}</div>
     <div>{{person.profile.nickname}}</div>
     <div>{{person.profile.description}}</div>

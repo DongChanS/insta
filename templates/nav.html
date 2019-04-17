@@ -12,9 +12,6 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'posts:list' %}">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'accounts:password' %}">비밀번호 수정</a>
-      </li>
       {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'people' user.username %}">Profile</a> 
@@ -24,6 +21,12 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'accounts:update' %}">회원정보수정</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:password' %}">비밀번호 수정</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'posts:create' %}">새글쓰기</a>
         </li>
       {% else %}
         <li class="nav-item">
