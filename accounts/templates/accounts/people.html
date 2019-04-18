@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load bootstrap4 %}
 
 {% block content %}
 
@@ -9,11 +10,13 @@
   </div>
   <div class="col-9 text-center">
     <h2>{{person.username}}
+      {% if person.id != user.id %}
         {% if person in user.following.all %}
-          <a href="{% url 'accounts:follow' person.id %}">팔로우됨</a>
+          <a href="{% url 'accounts:follow' person.id %}" class="btn btn-outline-primary">UnFollow</a>
         {% else %}
-          <a href="{% url 'accounts:follow' person.id %}">팔로우</a>
+          <a href="{% url 'accounts:follow' person.id %}" class="btn btn-primary">Follow</a>
         {% endif %}
+      {% endif %}
     </h2>
     <div>{{person.last_name}}{{person.first_name}}</div>
     <div>{{person.profile.nickname}}</div>
@@ -29,8 +32,22 @@
 
 <div class="row">
   {% for post in person.post_set.all %}
-    <div class="col-4">
-      <img src="{{ post.image.url }}", class="img-fluid">
+    <div class="card post-card" style="width: 40rem;">
+      <div class="card-header">
+        <a href="{% url 'people' post.user.username %}"><span>{{post.user}}</span></a>
+      </div>
+      <img src="{{ post.image.url }}" 
+           class="card-img-top card-img" alt="...">
+      <div class="card-body">
+        <p class="card-text">{{ post.content }}</p>
+        {% if post.user == request.user %}
+          <a href="{% url 'posts:delete' post.id %}" class="btn btn-danger">삭제</a>
+          <a href="{% url 'posts:update' post.id %}" class="btn btn-success">수정</a>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{post.like_users.count}}명이 좋아합니다.</p>
+      </div>
     </div>
   {% endfor %}
 </div>

@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.forms import formset_factory
+from django.db.models import Q
 """
 https://docs.djangoproject.com/en/2.1/topics/http/decorators/
 
@@ -17,11 +18,13 @@ require_safe : GET & HEAD method만 허용하는 데코레이터
 def create(request):
     if request.method == "POST":
         # modelform을 통해서 Post를 만들어줌.
-        form = PostModelForm(request.POST)
+        form = PostModelForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
             messages.success(request, "Successfully uploaded!")
-            return redirect("posts:list")
+            return redirect("people", request.user)
         else:
             messages.error(request, "request denied!")
             return redirect("posts:create")
@@ -33,7 +36,12 @@ def create(request):
         })
 
 def list(request):
-    posts = Post.objects.all()
+    # 1. 내가 팔로우한 사람들의 Post만 보여줌.
+    #직관적인 approach : Post에 user_id컬럼이 있는데, 이게 내가 팔로우한 유저들의 아이디에 포함되는가?
+    
+    condition = Q(user__in = request.user.following.all()) | Q(user = request.user)
+    posts = Post.objects.filter(condition)
+    
     form = CommentModelForm()
     return render(request, 'posts/list.html', {
         'posts' : posts,

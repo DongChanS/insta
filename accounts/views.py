@@ -52,7 +52,7 @@ def people(request, username):
     # 1. settings.AUTH_USER_MODEL (django.conf) -> 얘는 view에서 못쓴다고함.
     # 2. get_user_model() (django.contrib.auth import get_user_model())
     return render(request, 'accounts/people.html', {
-        'person':person
+        'person':person,
     })
 
 @login_required
@@ -120,3 +120,4 @@ def follow(request, user_id):
         from_user.following.add(to_user)
     
     return redirect('people', to_user)
+

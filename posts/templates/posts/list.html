@@ -8,7 +8,9 @@
   <!-- flexbox -->
     {% for post in posts %}
     <div class="card post-card" style="width: 40rem;">
-      <div class="card-header"><span>{{post.user}}</span></div>
+      <div class="card-header">
+        <a href="{% url 'people' post.user.username %}"><span>{{post.user}}</span></a>
+      </div>
       <img src="{{ post.image.url }}" 
            class="card-img-top card-img" alt="...">
       <div class="card-body">

@@ -4,8 +4,8 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-6 offset-3" enctype="multipart/form-data">
-      <form method="POST">
+    <div class="col-6 offset-3">
+      <form method="POST" enctype="multipart/form-data">
         {% bootstrap_form form %}
         {% csrf_token %}  
         <button type="submit" class="btn btn-primary">Upload</button>
