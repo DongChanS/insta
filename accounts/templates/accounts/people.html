@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 
 {% load bootstrap4 %}
+{% load static %}
 
 {% block content %}
 
 <header class="row people-title">
   <div class="col-3">
-    <img src="https://picsum.photos/200/100/?random">
+    {% if person.profile.image %}
+      <img src="{{person.profile.image.url}}">
+    {% else %}
+      <img src="{% static 'accounts/default.jpg' %}">
+    {% endif %}
   </div>
   <div class="col-9 text-center">
     <h2>{{person.username}}

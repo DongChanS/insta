@@ -11,7 +11,7 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     description = models.TextField(blank=True)
     nickname = models.CharField(max_length=30, blank=True)
-
+    image = models.ImageField(blank=True)
 
     """
     특정 유저.followers : 나를 팔로우 하는 유저들
